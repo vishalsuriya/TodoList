@@ -17,21 +17,25 @@ app.get("/tasks", async (req, res) => {
     }
   });
 
-app.post("/newtask",async(req,res)=>{
-  try{
-    const {newTask} = req.body;
-    const result = await DB.query("INSERT INTO tasks (description) VALUES($1) RETURNING *",
-      [newTask]
-    );
-    res.json(result.rows[0]);
-  }catch(err){
-    console.error(err.message);
-  }
-});
+  app.post("/newtask", async (req, res) => {
+    try {
+      const { description } = req.body;  
+      const result = await DB.query(
+        "INSERT INTO tasks (description) VALUES($1) RETURNING *",
+        [description]
+      );
+      res.json(result.rows[0]);
+    } catch (err) {
+      console.error(err.message);
+      res.status(500).send("Server error");
+    }
+  });
+  
 app.put("/update/:id",async(req,res)=>{
   try{
-    const {id,description} = req.body;
-    const result = await DB.query("UPDATE tasks SET description = $1 where task_id= $2"
+    const {id} = req.params;
+    const {description} = req.body;
+    const result = await DB.query("UPDATE tasks SET description = $1 where task_id= $2 RETURNING *"
       ,[description,id]
     );
     res.json(result.rows[0]);
@@ -42,7 +46,7 @@ app.put("/update/:id",async(req,res)=>{
 
 app.delete("/delete/:id",async(req,res)=>{
   try{
-    const {id} = req.body;
+    const {id} = req.params;
     const result = await DB.query("DELETE FROM tasks WHERE task_id = $1",
       [id]
     );
