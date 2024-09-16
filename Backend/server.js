@@ -3,10 +3,14 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const DB = require("./connection");
+const dotenv = require("dotenv");
 const PORT  = 8000;
 app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+dotenv.config();
+
+
 app.get("/tasks", async (req, res) => {
     try {
       const result = await DB.query("SELECT * FROM tasks");
