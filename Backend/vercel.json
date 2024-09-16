@@ -1,0 +1,19 @@
+{
+    "version": 2,
+    "builds": [
+      {
+        "src": "./server.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/api/(.*)",
+        "dest": "/api/$1.js"
+      }
+    ],
+    "env": {
+      "DATABASE_URL": "postgres://default:1EmH5NsbPhTY@ep-summer-poetry-a44sj5jw-pooler.us-east-1.aws.neon.tech:5432/verceldb?sslmode=require"
+    }
+  }
+  
