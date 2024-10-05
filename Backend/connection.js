@@ -1,8 +1,8 @@
 require('dotenv').config();
 const {Client} = require("pg");
 const DB = new Client({
-    connectionString : process.env.POSTGRES_URL,
-})
+    connectionString: process.env.DATABASE_URL
+});
 DB.connect((err)=>{
     if(err){
         console.error('Connection error:', err.stack);
