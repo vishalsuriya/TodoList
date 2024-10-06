@@ -19,7 +19,7 @@ const EditTask = ({ task, onSave }) => {
   const updateDescription = async () => {
     try {
       const body = { description };
-      const response = await fetch(`http://localhost:8000/update/${task.task_id}`, {
+      const response = await fetch(`https://todolist-hb88.onrender.com/update/${task.task_id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),

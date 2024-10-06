@@ -6,7 +6,7 @@ const ListTasks = () => {
 
   const fetchTask = async () => {
     try {
-      const response = await fetch("http://localhost:8000/tasks");
+      const response = await fetch("https://todolist-hb88.onrender.com/tasks");
       const data = await response.json();
       setTasks(data);
     } catch (err) {
@@ -20,7 +20,7 @@ const ListTasks = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`http://localhost:8000/delete/${id}`, {
+      const response = await fetch(`https://todolist-hb88.onrender.com/delete/${id}`, {
         method: "DELETE",
       });
   

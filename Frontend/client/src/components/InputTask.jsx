@@ -11,7 +11,7 @@ const InputTask = () => {
             return; 
           }
       const body = { description };
-      const response = await fetch("http://localhost:8000/newtask", {
+      const response = await fetch("https://todolist-hb88.onrender.com/newtask", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(body),
