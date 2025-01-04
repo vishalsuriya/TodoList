@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import { MDBTable, MDBTableHead, MDBTableBody, MDBBtn } from 'mdb-react-ui-kit';
+import { MDBTable, MDBTableHead, MDBTableBody} from 'mdb-react-ui-kit';
 import EditTask from "./EditTask";
 const ListTasks = () => {
   const [tasks, setTasks] = useState([]);
 
   const fetchTask = async () => {
     try {
-      const response = await fetch("https://todolist-hb88.onrender.com/tasks");
+      const response = await fetch("http://localhost:8000/tasks");
       const data = await response.json();
       setTasks(data);
     } catch (err) {
@@ -20,13 +20,12 @@ const ListTasks = () => {
 
   const handleDelete = async (id) => {
     try {
-      const response = await fetch(`https://todolist-hb88.onrender.com/delete/${id}`, {
+      const response = await fetch(`http://localhost:8000/delete/${id}`, {
         method: "DELETE",
       });
   
       if (response.ok) {
-        setTasks(tasks.filter(task=>task.task_id !== id));
-        console.log(`Task with id ${id} deleted`);
+        setTasks(tasks.filter(task=>task.id !== id));
       } else {
         console.log("Failed to delete task, status:", response.status);
       }
@@ -45,7 +44,7 @@ const ListTasks = () => {
       </MDBTableHead>
       <MDBTableBody>
         {tasks.map((task) => (
-          <tr key={task.task_id}>
+          <tr key={task.id}>
             <td>{task.description}</td>
             <td>
               <EditTask task = {task}/>
@@ -53,7 +52,7 @@ const ListTasks = () => {
             <td>
               <button 
                 className="btn btn-danger"
-                onClick={() => handleDelete(task.task_id)}
+                onClick={() => handleDelete(task.id)}
               >
                 Delete
               </button>

@@ -31,7 +31,7 @@ app.get("/tasks", async (req, res) => {
       res.json(result.rows[0]);
     } catch (err) {
       console.error(err.message);
-      res.status(500).send("Server error");
+      res.status(500).send("server error");
     }
   });
   
