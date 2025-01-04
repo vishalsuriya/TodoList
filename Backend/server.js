@@ -39,7 +39,7 @@ app.put("/update/:id",async(req,res)=>{
   try{
     const {id} = req.params;
     const {description} = req.body;
-    const result = await DB.query("UPDATE tasks SET description = $1 where task_id= $2 RETURNING *"
+    const result = await DB.query("UPDATE tasks SET description = $1 where id= $2 RETURNING *"
       ,[description,id]
     );
     res.json(result.rows[0]);
@@ -51,7 +51,7 @@ app.put("/update/:id",async(req,res)=>{
 app.delete("/delete/:id",async(req,res)=>{
   try{
     const {id} = req.params;
-    const result = await DB.query("DELETE FROM tasks WHERE task_id = $1",
+    const result = await DB.query("DELETE FROM tasks WHERE id = $1",
       [id]
     );
     res.json("deleted sucessfully");
